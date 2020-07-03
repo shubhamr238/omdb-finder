@@ -22,7 +22,7 @@ class App extends Component {
     };
   }
 
-  apiCall = () => {
+  apiCall = async () => {
     var queryString =
       "http://www.omdbapi.com/?apikey=" +
       process.env.REACT_APP_OMDB_API_KEY +
@@ -32,14 +32,14 @@ class App extends Component {
       "&page=" +
       this.state.page;
     if (
-      this.state.year !== undefined &&
-      this.state.year !== "" &&
+      this.state.year !== undefined ||
+      this.state.year !== "" ||
       this.state.year !== null
     ) {
       queryString += "&y=" + this.state.year;
     }
     console.log(queryString);
-    axios.get(queryString).then((res) => {
+    await axios.get(queryString).then((res) => {
       if (res.data.Response === "True") {
         this.setState({
           ...this.state,
@@ -64,20 +64,27 @@ class App extends Component {
 
   handleSearchTermChange = (e) => {
     this.setState({
+      ...this.state,
       searchTerm: e.target.value,
     });
   };
 
   handleYearChange = (e) => {
     this.setState({
+      ...this.state,
       year: e.target.value,
     });
   };
 
-  onSearchBoxSubmit = (e) => {
-    e.preventDefault();
-    this.setState({ ...this.state, loading: true, response: "" });
-    this.apiCall();
+  onSearchBoxSubmit = async (e) => {
+    await e.preventDefault();
+    await this.setState({
+      ...this.state,
+      page: 1,
+      loading: true,
+      response: "",
+    });
+    await this.apiCall();
   };
 
   onClearClick = (e) => {
@@ -95,13 +102,12 @@ class App extends Component {
   };
 
   onPageChange = async (e, p) => {
-    console.log(p);
     await this.setState({ ...this.state, page: p });
     await this.apiCall();
   };
 
   render() {
-    let numberPages = Math.floor(this.state.totalResults / 10);
+    let numberPages = Math.ceil(parseInt(this.state.totalResults) / 10);
     return (
       <div className="App">
         <Navbar appName="OMDB Series Finder" />
@@ -121,7 +127,7 @@ class App extends Component {
         {this.state.response === "false" ? (
           <DispOut content={"No Result Found!"} />
         ) : null}
-        {numberPages > 10 ? (
+        {numberPages > 0 ? (
           <Paginate count={numberPages} onChange={this.onPageChange} />
         ) : null}
       </div>
