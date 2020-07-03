@@ -5,7 +5,6 @@ import SearchBox from "./components/SearchBox/SearchBox.jsx";
 import MovieList from "./components/MovieList/MovieList.jsx";
 import Spinner from "./components/Spinner/Spinner.jsx";
 import DispOut from "./components/DispOut/DispOut.jsx";
-import "./App.css";
 
 class App extends Component {
   constructor() {
@@ -86,7 +85,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar appName="OMDB Finder" />
+        <Navbar appName="OMDB Series Finder" />
         <SearchBox
           searchTermValue={this.state.searchTerm}
           yearValue={this.state.year}
