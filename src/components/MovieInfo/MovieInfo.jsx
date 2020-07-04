@@ -15,7 +15,7 @@ class MovieInfo extends Component {
   }
   componentDidMount() {
     var qString =
-      "http://www.omdbapi.com/?apikey=" +
+      "https://www.omdbapi.com/?apikey=" +
       process.env.REACT_APP_OMDB_API_KEY +
       "&plot=full" +
       "&i=" +
@@ -44,7 +44,14 @@ class MovieInfo extends Component {
             alignItems="center"
           >
             <Grid item>
-              <img src={this.state.data.Poster} alt={this.state.data.Title} />
+              <img
+                src={
+                  this.state.data.Poster === "N/A"
+                    ? "https://s3-ap-southeast-1.amazonaws.com/upcode/static/default-image.jpg"
+                    : this.state.data.Poster
+                }
+                alt={this.state.data.Title}
+              />
             </Grid>
             <Grid style={{ width: "500px" }} item>
               <h2>
