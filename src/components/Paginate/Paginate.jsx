@@ -9,7 +9,7 @@ const Paginate = (props) => {
         <Pagination
           count={props.count}
           onChange={props.onChange}
-          size="large"
+          size="small"
         />
       </Box>
     </Container>

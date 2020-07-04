@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Grid,
   Card,
@@ -9,15 +9,23 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
+
+import Modal from "react-modal";
 import { makeStyles } from "@material-ui/core/styles";
+import MovieInfo from "../MovieInfo/MovieInfo";
+
 const useStyles = makeStyles({
   root: {
     //maxWidth: 360,
     marginBottom: "10px",
   },
 });
+
 const MovieItem = (props) => {
   const classes = useStyles();
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Card className={classes.root}>
@@ -43,9 +51,24 @@ const MovieItem = (props) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => setModalIsOpen(true)}
+          >
             View More
           </Button>
+          <Modal
+            style={{
+              overlay: { backgroundColor: "grey", zIndex: "2" },
+              content: {},
+            }}
+            isOpen={modalIsOpen}
+            ariaHideApp={false}
+          >
+            <Button onClick={() => setModalIsOpen(false)}>Go Back</Button>
+            <MovieInfo imdbID={props.data.imdbID} />
+          </Modal>
         </CardActions>
       </Card>
     </Grid>

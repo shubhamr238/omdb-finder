@@ -1,0 +1,11 @@
+p {
+  display: inline;
+}
+.bold {
+  font-weight: bold;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  img {
+    width: 200px;
+  }
+}

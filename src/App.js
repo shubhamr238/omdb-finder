@@ -38,7 +38,7 @@ class App extends Component {
     ) {
       queryString += "&y=" + this.state.year;
     }
-    console.log(queryString);
+    //console.log(queryString);
     await axios.get(queryString).then((res) => {
       if (res.data.Response === "True") {
         this.setState({
@@ -58,7 +58,7 @@ class App extends Component {
           dataArr: [],
         });
       }
-      console.log(this.state.data, this.state.totalResults);
+      //console.log(this.state.data, this.state.totalResults);
     });
   };
 
