@@ -28,7 +28,6 @@ class App extends Component {
       process.env.REACT_APP_OMDB_API_KEY +
       "&s=" +
       this.state.searchTerm +
-      "&type=series" +
       "&page=" +
       this.state.page;
     if (
@@ -110,7 +109,7 @@ class App extends Component {
     let numberPages = Math.ceil(parseInt(this.state.totalResults) / 10);
     return (
       <div className="App">
-        <Navbar appName="OMDB Series Finder" />
+        <Navbar appName="OMDB Finder" />
         <SearchBox
           searchTermValue={this.state.searchTerm}
           yearValue={this.state.year}
