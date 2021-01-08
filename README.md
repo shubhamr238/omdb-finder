@@ -1,6 +1,6 @@
 # OMDB Finder
 
-This project can be used to find TV Series.
+This Forntend App can be used to find TV Series, Movies and Documentries. Please Visit [Here](https://omdb-finder.netlify.app/).
 
 ## Available Scripts
 
